@@ -1,0 +1,29 @@
+
+version: '3'
+
+# ic = image-classification
+
+services:
+
+  predictor:
+    build: .
+    image: mikkohei13/ic_predictor
+    container_name: ic_predictor
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    volumes:
+      - ./app:/app
+
+  automl-model:
+    image: gcr.io/automl-vision-ondevice/gcloud-container-1.12.0:latest
+    container_name: ic_automl-model
+    ports:
+      - 8501:8501
+    volumes:
+      - ./app/_models/lepidoptera_vote_20200811/:/tmp/mounted_model/0001 # if this is incorrect, there will be connection error when automl container is called, nyt when it's started.
+
+volumes: 
+  automl-volume: 
+
+# docker run --rm --name loxia_automl-model -p 8501:8501 -v /home/mikko/code/Loxpyt/_models/birdmig1_animals_full_20200212/:/tmp/mounted_model/0001 -t gcr.io/automl-vision-ondevice/gcloud-container-1.12.0:latest
+
