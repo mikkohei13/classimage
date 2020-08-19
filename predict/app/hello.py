@@ -95,7 +95,6 @@ for filename in os.listdir(baseDir):
 # DEBUG: Change file name based on quality
     qualitySuffix = str(imageData[filename]['upvote']) + "000"
     qualitySuffix= qualitySuffix[2:5]
-#    qualitySuffix = round((imageData[filename]['upvote'] * 1000), 0)
     print(qualitySuffix)
 
     oldFilePath = filePath
@@ -107,12 +106,15 @@ for filename in os.listdir(baseDir):
     os.rename(oldFilePath, newFilePath)
 
 
-print("\n---------------------------------\n")
-print(data)
+#print("\n---------------------------------\n")
+#print(data)
 
 print("\n---------------------------------\n")
 
-so = sorted(data.items(), key=lambda item: float(item[1]['upvote']))
+sortBy = "larva"
+sortBy = "upvote"
+
+so = sorted(data.items(), key=lambda item: float(item[1][sortBy]))
 print(so)
 
 #for x in range(0, 400):

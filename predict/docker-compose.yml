@@ -20,7 +20,9 @@ services:
     ports:
       - 8501:8501
     volumes:
-      - ./app/_models/lepidoptera_vote_20200811/:/tmp/mounted_model/0001 # if this is incorrect, there will be connection error when automl container is called, nyt when it's started.
+      # if this is incorrect, there will be connection error when automl container is called, nyt when it's started.
+      - ./app/_models/lepidoptera_vote_20200811/:/tmp/mounted_model/0001
+#      - ./app/_models/lepidoptera_lifestage_20200811/:/tmp/mounted_model/0001 
 
 volumes: 
   automl-volume: 
